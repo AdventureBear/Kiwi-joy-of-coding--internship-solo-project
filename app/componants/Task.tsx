@@ -48,17 +48,20 @@ const Task = ({ tasks }: Props) => {
         </Table.Header>
         <Table.Body>
           {filteredTasks.map((task: TaskType) => {
+            console.log("Task:", task)
             return (
               <Table.Row align="start" key={task.id}>
                 <Table.Cell maxWidth="25px">
                   <Checkbox checked={task.completed} aria-readonly />
                 </Table.Cell>
-                {priorities.map((priority) => {
-                  if (task.priority === priority.value)
-                    return (
-                      <Table.Cell maxWidth="25px">{priority.label}</Table.Cell>
-                    );
-                })}
+
+                {/*{priorities.map((priority) => {*/}
+                {/*  if (task.priority === priority.value)*/}
+                {/*    return (*/}
+                {/*      <Table.Cell key={priority.value} maxWidth="25px">{priority.label}</Table.Cell>*/}
+                {/*    );*/}
+                {/*})}*/}
+                      <Table.Cell maxWidth="25px">{task.priority}</Table.Cell>
 
                 <Table.ColumnHeaderCell maxWidth="56px">
                   {task.title}
@@ -68,6 +71,7 @@ const Task = ({ tasks }: Props) => {
                   {formatDate(task.dueDate)}
                 </Table.Cell>
               </Table.Row>
+
             );
           })}
         </Table.Body>

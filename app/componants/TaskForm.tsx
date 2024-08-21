@@ -1,6 +1,6 @@
 "use client";
 
-import PriorityDropDown from "@/app/componants/PriorityDropDown";
+import PriorityDropDown from "@/app/componants/priorityDropDown";
 import {
   Card,
   Flex,
@@ -41,6 +41,7 @@ const TaskForm = ({ task }: Props) => {
     dueDate: task ? task.dueDate : startDate,
     priority: task ? task.priority : Priority.low,
   });
+
   // handleSubmit,
   const { register, setValue } = useForm<TaskForm>({
     defaultValues: {
@@ -56,16 +57,26 @@ const TaskForm = ({ task }: Props) => {
     setFormData({ ...formData, dueDate: date });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     if (task) {
       let updatedTask: TaskType;
       updatedTask = { ...formData, id: task.id };
       console.log(updatedTask);
-      updateTask(updatedTask);
+      await updateTask(updatedTask);
+      router.push("/tasks")
+      router.refresh()
     } else {
-      newTask(formData);
+      try {
+        await newTask(formData);
+      } catch(error) {
+        console.log("error: ", error)
+      } finally {
+        router.push("/tasks")
+        router.refresh()
+      }
+
     }
-    router.push("");
   };
 
   const handleCancel = () => {
@@ -73,7 +84,7 @@ const TaskForm = ({ task }: Props) => {
   };
 
   return (
-    <form className="w-3/4 h-fit" onSubmit={handleSubmit}>
+    <form className="w-3/4 h-fit" onSubmit={(e)=>{handleSubmit(e)}}>
       <Card size="2">
         <Flex direction="column" gap="3">
           <Grid gap="1">
