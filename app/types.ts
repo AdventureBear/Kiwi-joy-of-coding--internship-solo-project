@@ -1,64 +1,76 @@
-import { Priority } from "@prisma/client";
+import {Priority} from "@prisma/client";
+
+
+// export type TaskType = {
+//     id: number;
+//     title: string;
+//     description: string;
+//     completed: boolean;
+//     priority: Priority;
+//     dueDate: Date;
+//   };
 
 
 export type TaskType = {
-    id: number;
-    title: string;
-    description: string;
-    completed: boolean;
-    priority: Priority;
-    dueDate: Date;
-  };
+    completed: boolean,
+    description: string,
+    dueDate: Date,
+    id: number,
+    priority: "low" | "medium" | "high",
+    title: string,
+    // task?: TaskType
+};
 
-  export const priorities = [
+
+export const priorities = [
     {
-      label: "Low",
-      value: "low",
+        label: "Low",
+        value: "low",
     },
     {
-      label: "Medium",
-      value: "medium",
+        label: "Medium",
+        value: "medium",
     },
     {
-      label: "High",
-      value: "high",
+        label: "High",
+        value: "high",
     },
     {
-    
-      label: "Urgent",
-      value: "urgent",
+
+        label: "Urgent",
+        value: "urgent",
     }
-  ]
+]
 
 export const priorityFilter = [
-  {
-    label: "Low",
-    value: "low",
-  },
-  {
-    label: "Medium",
-    value: "medium",
-  },
-  {
-    label: "High",
-    value: "high",
-  },
-  {
-  
-    label: "Urgent",
-    value: "urgent",
-  }
+    {
+        label: "Low",
+        value: "low",
+    },
+    {
+        label: "Medium",
+        value: "medium",
+    },
+    {
+        label: "High",
+        value: "high",
+    },
+    {
+
+        label: "Urgent",
+        value: "urgent",
+    }
 ]
 
 export const statusFilter = [
-  {
-    label: "Completed",
-    value: true,
-  },
-  {
-  
-    label: "Incomplete",
-    value: false,
-  }
+    {
+        label: "Completed",
+        value: true,
+    },
+    {
+
+        label: "Incomplete",
+        value: false,
+    }
 
 ]
